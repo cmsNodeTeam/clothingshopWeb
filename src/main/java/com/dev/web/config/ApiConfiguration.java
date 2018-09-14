@@ -42,7 +42,7 @@ public class ApiConfiguration extends WebMvcConfigurationSupport {
 	@Override
     public void addInterceptors(InterceptorRegistry registry) {
 		List<String> pathPatterns = new ArrayList<>();
-		pathPatterns.add("/superLogin");
+		pathPatterns.add("/login");
 		registry.addInterceptor(new GlobalInterceptor()).addPathPatterns("/*/**")
 			.excludePathPatterns(pathPatterns);
 		registry.addInterceptor(new WebInterceptor()).addPathPatterns("/web/*/**");
@@ -53,7 +53,7 @@ public class ApiConfiguration extends WebMvcConfigurationSupport {
 		CookieLocaleResolver cookieLocale = new CookieLocaleResolver();
 		// 默认语言
 		cookieLocale.setDefaultLocale(Locale.CHINA);
-		cookieLocale.setCookieName("superLanguage");
+		cookieLocale.setCookieName("language");
 		cookieLocale.setCookieMaxAge(7 * 24 * 3600);
 		return cookieLocale;
 	}

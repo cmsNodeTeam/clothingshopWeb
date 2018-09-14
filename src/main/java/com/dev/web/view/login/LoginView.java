@@ -12,4 +12,9 @@ public class LoginView {
 	public String gotoLogin() {
 		return "login/admin_login";
 	}
+	
+	@GetMapping("index")
+	public String gotoIndex() {
+		return "index/admin_index";
+	}
 }

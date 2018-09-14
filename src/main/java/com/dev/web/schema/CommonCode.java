@@ -5,5 +5,5 @@ public class CommonCode {
 	public static final int FAILED = 0;
 	public static final int REDIRECT = -302;
 	
-	public static final String sessionName = "superSession";
+	public static final String sessionName = "userSession";
 }

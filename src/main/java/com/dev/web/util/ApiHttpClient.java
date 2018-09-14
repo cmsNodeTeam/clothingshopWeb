@@ -25,7 +25,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.dev.web.service.config.CmsApiConfig;
-import com.dev.web.service.config.UrlEnum;
 
 @Component
 public class ApiHttpClient {
@@ -69,22 +68,13 @@ public class ApiHttpClient {
 		return apiConfig.getDomain() + url;
 	}
 
-	public <T> T post(UrlEnum urlEnum, Object body, Class<T> responseType, Object... uriVariables) {
-		String path = (String) apiConfig.getUrl().get(urlEnum.toString());
-		return post(path, body, responseType, uriVariables);
-	}
-
 	public <T> T post(String url, Class<T> responseType, Object... uriVariables) {
 		return post(url, null, responseType, uriVariables);
 	}
 
-	public <T> T post(UrlEnum urlEnum, Class<T> responseType, Object... uriVariables) {
-		return post(urlEnum, null, responseType, uriVariables);
-	}
-
 	public <T> T post(String url, Object body, Class<T> responseType, Object... uriVariables) {
 		if (!url.startsWith("http")) {
-			// Ã»ÓÐÒÔhttp»òÕßhttps¿ªÍ·¾Í¸øËû¼ÓÉÏÓòÃû
+			// æ²¡æœ‰ä»¥httpæˆ–è€…httpså¼€å¤´å°±ç»™ä»–åŠ ä¸ŠåŸŸå
 			url = getHttpUrl(url);
 		}
 		if (body == null) {
@@ -94,23 +84,13 @@ public class ApiHttpClient {
 		return restTemplate.exchange(url, HttpMethod.POST, requestEntity, responseType, uriVariables).getBody();
 	}
 	
-	public <T> T get(UrlEnum urlEnum, Class<T> responseType, Object... uriVariables) {
-		String path = (String) apiConfig.getUrl().get(urlEnum.toString());
-		return get(path, null, responseType, uriVariables);
-	}
-	
-	public <T> T get(UrlEnum urlEnum, String query, Class<T> responseType, Object... uriVariables) {
-		String path = (String) apiConfig.getUrl().get(urlEnum.toString());
-		return get(path, query, responseType, uriVariables);
-	}
-	
 	public <T> T get(String url, Class<T> responseType, Object... uriVariables) {
 		return get(url, null, responseType, uriVariables);
 	}
 	
 	public <T> T get(String url, String query, Class<T> responseType, Object... uriVariables) {
 		if (!url.startsWith("http")) {
-			// Ã»ÓÐÒÔhttp»òÕßhttps¿ªÍ·¾Í¸øËû¼ÓÉÏÓòÃû
+			// æ²¡æœ‰ä»¥httpæˆ–è€…httpså¼€å¤´å°±ç»™ä»–åŠ ä¸ŠåŸŸå
 			url = getHttpUrl(url);
 		}
 		String params = "";
