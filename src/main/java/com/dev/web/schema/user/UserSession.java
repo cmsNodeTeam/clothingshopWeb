@@ -6,7 +6,7 @@ public class UserSession {
 	
 	private String username;
 	
-	private String sessionid;
+	private String sessionid;//这个字段可能存用户密码
 	
 	private String language;
 	

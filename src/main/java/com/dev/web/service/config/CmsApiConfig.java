@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix="cms")
 public class CmsApiConfig {
 
-	public String domain;
+	public String domain = "";
 	
-	public String header;
+	public String header = "";
 	
 	public Map<String, Object> url = new HashMap<>();
 
