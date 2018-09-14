@@ -12,6 +12,8 @@ public class UserSession {
 	
 	private String rights;
 	
+	private String shopid;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -52,6 +54,14 @@ public class UserSession {
 			return true;
 		}
 		return false;
+	}
+
+	public String getShopid() {
+		return shopid;
+	}
+
+	public void setShopid(String shopid) {
+		this.shopid = shopid;
 	}
 	
 }

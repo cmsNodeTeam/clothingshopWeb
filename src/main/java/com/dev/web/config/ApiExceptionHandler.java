@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dev.web.schema.CommonCode;
 import com.dev.web.schema.CommonResult;
+import com.dev.web.schema.exception.ApiException;
 import com.dev.web.schema.exception.RedirectException;
 
 @ControllerAdvice
@@ -24,6 +25,9 @@ public class ApiExceptionHandler {
 		}else if(e instanceof RedirectException) {
 			result.setRedirectURL(((RedirectException)e).getRedirectUrl());
 			result.setCode(CommonCode.REDIRECT);
+		}else if(e instanceof ApiException) {
+			result.setCode(((ApiException) e).getCode());
+			result.setMsg(e.getMessage());
 		}
 		e.printStackTrace();
 		return result;
