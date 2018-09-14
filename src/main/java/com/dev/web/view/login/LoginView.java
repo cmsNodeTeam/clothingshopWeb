@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class LoginView {
 
-	@GetMapping("superLogin")
+	@GetMapping("login")
 	public String gotoLogin() {
-		return "super/login/admin_login";
+		return "login/admin_login";
 	}
 }

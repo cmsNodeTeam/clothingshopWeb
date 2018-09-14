@@ -8,7 +8,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -29,12 +28,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 public class ApiConfiguration extends WebMvcConfigurationSupport {
-
-	@Value("${server.servlet.context-path}")
-    private String cmsContextPath;
-	
-	@Value("${server.port}")
-	private String cmsPort;
 	
 	@Resource
     private void configureThymeleafStaticVars(ThymeleafViewResolver viewResolver) {
@@ -50,12 +43,6 @@ public class ApiConfiguration extends WebMvcConfigurationSupport {
     public void addInterceptors(InterceptorRegistry registry) {
 		List<String> pathPatterns = new ArrayList<>();
 		pathPatterns.add("/superLogin");
-//		pathPatterns.add("/swagger-ui.html");
-//		pathPatterns.add("/swagger-resources/*/**");
-//		pathPatterns.add("/webjars/*/**");
-//		pathPatterns.add("/webjars/**");
-//		pathPatterns.add("/static/*/**");
-//		pathPatterns.add("/static/**");
 		registry.addInterceptor(new GlobalInterceptor()).addPathPatterns("/*/**")
 			.excludePathPatterns(pathPatterns);
 		registry.addInterceptor(new WebInterceptor()).addPathPatterns("/web/*/**");
@@ -73,12 +60,8 @@ public class ApiConfiguration extends WebMvcConfigurationSupport {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
 	}
-
-
 
 	@Override
 	protected void extendMessageConverters(List<HttpMessageConverter<?>> converters) {

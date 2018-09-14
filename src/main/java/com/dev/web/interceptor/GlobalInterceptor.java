@@ -19,9 +19,9 @@ public class GlobalInterceptor implements HandlerInterceptor {
 			String ajaxRequest = request.getHeader("X-Requested-With");
 			String contextPath = request.getContextPath();
 			if(ajaxRequest != null && ajaxRequest.equals("XMLHttpRequest")) {
-				throw new RedirectException("/superLogin", "");
+				throw new RedirectException("/login", "");
 			}
-			response.sendRedirect(contextPath + "/superLogin");
+			response.sendRedirect(contextPath + "/login");
 			return false;
 		}
 		
