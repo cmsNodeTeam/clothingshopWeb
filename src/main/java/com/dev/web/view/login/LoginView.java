@@ -1,12 +1,19 @@
 package com.dev.web.view.login;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.dev.web.service.config.CmsApiConfig;
 
 @Controller
 @RequestMapping("/")
 public class LoginView {
+	
+	@Autowired
+	private CmsApiConfig apiConfig;
 
 	@GetMapping("login")
 	public String gotoLogin() {
@@ -14,7 +21,8 @@ public class LoginView {
 	}
 	
 	@GetMapping("index")
-	public String gotoIndex() {
+	public String gotoIndex(Model model) {
+		model.addAttribute("config", apiConfig);
 		return "index/admin_index";
 	}
 	
@@ -27,4 +35,5 @@ public class LoginView {
 	public String gotoTest() {
 		return "index/pages/test";
 	}
+	
 }

@@ -1,12 +1,9 @@
-<footer class="main-footer navbar-fixed-bottom" ng-controller="footerCtrl"><%#navbar-fixed-bottom%>
-    <strong>Copyright &copy; <%=CGlobal.aboutCMS.Copyright%> <a href="/super/aboutCMS" target="_blank">
-        <%=CGlobal.aboutCMS.author%> <%=CGlobal.serverLang('工作室')%></a>.
+<footer class="main-footer navbar-fixed-bottom" xmlns:th="http://www.thymeleaf.org">
+    <strong>Copyright &copy; <span th:text="${config.copyright}"></span> <a href="#">
+        <span th:text="${config.author}"></span> <span th:text="#{footer.studio}">工作室</span></a>.
     </strong>
-    <%=CGlobal.serverLang('版权所有')%>
-    <div class="pull-right skin-btn">
-        <button ng-repeat="(key,value) in skinList" class="btn btn-flat" ng-class="key+'-skin'"
-            ng-click="changeSkin('skin-'+key)" title="{{value}}"
-                data-toggle="tooltip"></button>
-        <b><%=CGlobal.serverLang('版本')%></b> <%=CGlobal.aboutCMS.version%>
+    <span th:text="#{footer.allright}">版权所有</span>
+    <div class="pull-right">
+        <b th:text="#{footer.right}">版本</b> <span th:text="${config.version}"></span>
     </div>
 </footer>

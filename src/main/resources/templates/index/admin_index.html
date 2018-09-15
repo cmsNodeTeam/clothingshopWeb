@@ -1,29 +1,28 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title><%=CGlobal.serverLang('衣购商城后台--管理')%></title>
-    <% include ../../public/header.html%>
+	<title><%=CGlobal.serverLang('衣购商城后台--管理')%></title>
 </head>
 <body class="hold-transition sidebar-mini fixed">
-    <div class="wrapper" ng-app="appCMS" style="padding-bottom: 20px;">
-        <% include ../public/navBar.html%>
-        <% include ../public/sideBar.html%>
-        <div id="ngView" ng-view></div>
-        <% include ./footer.html%>
-        <% include ../public/confirmModal.html%>
-    </div>
-    <fieldset class="hidden" id="_parameters">
-        <input type="hidden" title="loggedInUser" value="<%=adminSession.adminId%>">
-        <%if(CGlobal.isPermission(adminSession.rights,CGlobal.Rights.deleteSYSUser.code)){%>
-        <input type="hidden" title="DR_User" value="1"><%#删除用户权限%>
-        <%}%>
-    </fieldset>
-    <% include ../../public/body.html%>
-    <script src="/js/requirejs/requirejs.min.js" defer async="true"></script>
-    <script src="/js/super/index.js"></script>
-    <script src="/js/super/services.js"></script>
-    <script src="/js/super/filters.js"></script>
-    <script src="/js/super/cmsApp.js"></script>
-    <script src="/js/super/controllers.js"></script>
+	<div class="wrapper" ng-app="appCMS" style="padding-bottom: 20px;">
+		<% include ../public/navBar.html%> <% include ../public/sideBar.html%>
+		<div id="ngView" ng-view></div>
+		<div th:replace="index/footer :: footer"></div>
+	</div>
+	<script th:src="@{static/js/jquery/jquery.min.js}"></script>
+	<script th:src="@{static/js/jquery/overrideAjax.js}"></script>
+	<script th:src="@{static/js/bootstrap/bootstrap.min.js}"></script>
+	<script th:src="@{static/js/moment/moment.js}"></script>
+	<script th:src="@{static/js/adminLTE/app.js}"></script>
+	<script th:src="@{static/js/angular/angular.js}"></script>
+	<script th:src="@{static/js/angular/angular-route.min.js}"></script>
+	<!--客户端翻译资源文件-->
+	<script th:src="@{static/js/client-lang.js}"></script>
+	<!--全局js-->
+	<script th:src="@{static/js/global.js}"></script>
+	<script th:src="@{static/js/super/index.js}"></script>
+	<script th:src="@{static/js/super/services.js}"></script>
+	<script th:src="@{static/js/super/cmsApp.js}"></script>
+	<script th:src="@{static/js/super/controllers.js}"></script>
 </body>
 </html>

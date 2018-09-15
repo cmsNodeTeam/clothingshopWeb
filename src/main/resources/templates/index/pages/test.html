@@ -1,11 +1,7 @@
 <div class="content-wrapper">
     <section class="content-header">
-        <h1>
-            <%if(adminSession.shopId === 'SYSTEM'){%>
-                <%=CGlobal.serverLang('‰∏ªÈ°µ')%>
-            <%}else{%>
-                <%=adminSession.shopName%>
-            <%}%>
+        <h1 th:text="#{test.title}">
+        	≤‚ ‘“≥√Ê
         </h1>
     </section>
     <section class="content">

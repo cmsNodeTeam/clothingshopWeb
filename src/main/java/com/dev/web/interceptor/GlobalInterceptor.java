@@ -5,7 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.dev.web.config.CodeEnum;
 import com.dev.web.schema.CommonCode;
+import com.dev.web.schema.exception.ApiException;
 import com.dev.web.schema.exception.RedirectException;
 import com.dev.web.schema.user.UserSession;
 import com.dev.web.util.ServiceReferenceContext;
@@ -25,7 +27,13 @@ public class GlobalInterceptor implements HandlerInterceptor {
 			response.sendRedirect(contextPath + "/login");
 			return false;
 		}
-		
+		if(response.getStatus() == 404) {
+			if(isAjax) {
+				throw new ApiException(CodeEnum.ERROR_404.getCode(), CodeEnum.ERROR_404.getMsg());
+			}
+			response.sendRedirect(contextPath + "/index");
+			return false;
+		}
 		ServiceReferenceContext.setUserSession(session);
 		return true;
 	}

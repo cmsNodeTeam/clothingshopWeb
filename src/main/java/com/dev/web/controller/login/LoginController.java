@@ -41,7 +41,7 @@ public class LoginController {
 		session.setShopid(user.getShopId());
 		session.setUsername(user.getAdminId());
 		
-		request.setAttribute(CommonCode.sessionName, session);
+		request.getSession().setAttribute(CommonCode.sessionName, session);
 		resp.setCode(CommonCode.REDIRECT);
 		resp.setRedirectURL(contextPath + "/index");
 		return resp;
