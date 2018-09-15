@@ -43,6 +43,8 @@ public class ApiConfiguration extends WebMvcConfigurationSupport {
     public void addInterceptors(InterceptorRegistry registry) {
 		List<String> pathPatterns = new ArrayList<>();
 		pathPatterns.add("/login");
+		pathPatterns.add("/api/user/login");
+		pathPatterns.add("/api/user/change_language");
 		registry.addInterceptor(new GlobalInterceptor()).addPathPatterns("/*/**")
 			.excludePathPatterns(pathPatterns);
 		registry.addInterceptor(new WebInterceptor()).addPathPatterns("/web/*/**");

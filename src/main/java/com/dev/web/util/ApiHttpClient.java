@@ -58,6 +58,7 @@ public class ApiHttpClient {
 			String key = headerName.nextElement();
 			headers.add(key, request.getHeader(key));
 		}
+		headers.add("api-cms-interface", apiConfig.getHeader());
 		return headers;
 	}
 
