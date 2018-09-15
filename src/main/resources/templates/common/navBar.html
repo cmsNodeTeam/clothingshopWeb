@@ -1,4 +1,4 @@
-<header class="main-header" ng-controller="navBarController">
+<header class="main-header" ng-controller="navBarController" xmlns:th="http://www.thymeleaf.org">
     <a href="home" class="logo">
         <span class="logo-mini"><b>C</b>MS</span>
         <span class="logo-lg"><b>Clothing Shop </b>MS</span>
@@ -11,13 +11,6 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
-        <%if(adminSession.shopId !== 'SYSTEM'){%>
-        <div class="collapse navbar-collapse pull-left">
-            <ul class="nav navbar-nav">
-                <li><a href="shopDetail/<%=adminSession.shopId%>" style="font-size: large"><%=adminSession.shopName%></a></li>
-            </ul>
-        </div>
-        <%}%>
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <li class="dropdown messages-menu">
@@ -40,40 +33,25 @@
                 </li>
                 <li class="dropdown user user-menu">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<%=adminSession.userImg%>" class="user-image" alt="User Image">
-                        <span class="hidden-xs"><%=adminSession.adminName%></span>
+                        <img th:src="@{static/img/default.jpg}" class="user-image" alt="User Image">
+                        <span class="hidden-xs" th:text="${userSession.username}"></span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight">
                         <li class="user-header">
-                            <img src="<%=adminSession.userImg%>" class="img-circle" alt="User Image">
+                            <img th:src="@{static/img/default.jpg}" class="img-circle" alt="User Image">
                             <p>
                                 Oliver.wu - Web Developer
                                 <small>Member since Nov. 2016</small>
                             </p>
                         </li>
-                        <!--<li class="user-body">-->
-                            <!--<div class="row">-->
-                                <!--<div class="col-xs-4 text-center">-->
-                                    <!--<a href="javascript:void(0);">Followers</a>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-4 text-center">-->
-                                    <!--<a href="javascript:void(0);">Sales</a>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-4 text-center">-->
-                                    <!--<a href="javascript:void(0);">Friends</a>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</li>-->
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="javascript:void(0);"
-                                   class="btn btn-default btn-flat"><%=CGlobal.serverLang('个人信息')%></a>
-                                <!--<a href="javascript:void(0);"-->
-                                   <!--class="btn btn-default btn-flat"><%=CGlobal.serverLang('修改密码')%></a>-->
+                                   class="btn btn-default btn-flat" th:text="#{navbar.profile}">个人信息</a>
                             </div>
                             <div class="pull-right">
                                 <a href="javascript:void(0);" class="btn btn-default btn-flat"
-                                   ng-click="logOut()"><%=CGlobal.serverLang('退出')%></a>
+                                   ng-click="logOut()" th:text="#{navbar.logout}">退出</a>
                             </div>
                         </li>
                     </ul>

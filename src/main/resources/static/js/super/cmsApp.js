@@ -8,11 +8,11 @@ var app = angular.module('appCMS', ['ngRoute', 'cmsServices', 'cmsControllers'])
 app.config(function ($routeProvider) {
     $routeProvider.when('/home', {
         //主页
-        templateUrl: '/web/home',
+        templateUrl: 'web/home',
         controller: 'commonCtrl'
     }).when('/test', {
         //测试页面
-        templateUrl: '/web/test',
+        templateUrl: 'web/test',
         controller: 'commonCtrl'
     }).otherwise({
         redirectTo: '/home'
@@ -20,7 +20,7 @@ app.config(function ($routeProvider) {
 });
 
 //清除模板缓存
-app.run(function ($rootScope, $templateCache, $browser, $location, navLinkService) {
+app.run(function ($rootScope, $templateCache) {
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
         if (typeof(current) !== 'undefined') {
             $templateCache.remove(current['templateUrl']);

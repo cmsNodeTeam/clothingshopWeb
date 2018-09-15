@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dev.web.service.config.CmsApiConfig;
+import com.dev.web.util.ServiceReferenceContext;
 
 @Controller
 @RequestMapping("/")
@@ -23,6 +24,7 @@ public class LoginView {
 	@GetMapping("index")
 	public String gotoIndex(Model model) {
 		model.addAttribute("config", apiConfig);
+		model.addAttribute("userSession", ServiceReferenceContext.getUserSession());
 		return "index/admin_index";
 	}
 	
