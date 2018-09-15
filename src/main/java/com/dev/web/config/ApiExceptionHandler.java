@@ -23,7 +23,12 @@ public class ApiExceptionHandler {
 			result.setCode(CodeEnum.METHOD_NOT_SUPPORTED.getCode());
 			result.setMsg(e.getMessage());
 		}else if(e instanceof RedirectException) {
-			result.setRedirectURL(((RedirectException)e).getRedirectUrl());
+			String redirect = ((RedirectException)e).getRedirectUrl();
+			String contextPath = request.getContextPath();
+			if(!redirect.startsWith(contextPath)) {
+				redirect = contextPath + redirect;
+			}
+			result.setRedirectURL(redirect);
 			result.setCode(CommonCode.REDIRECT);
 		}else if(e instanceof ApiException) {
 			result.setCode(((ApiException) e).getCode());
