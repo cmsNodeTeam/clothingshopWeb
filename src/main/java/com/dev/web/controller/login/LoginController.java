@@ -48,8 +48,19 @@ public class LoginController {
 	}
 	
 	@PostMapping("logout")
-	public CommonResult userLogout() {
+	public CommonResult userLogout(HttpServletRequest request) {
 		CommonResult resp = new CommonResult();
+		CommonResult logoutResult = httpClient.post(GlobalStatus.getRemoteUrl(request), 
+				CommonResult.class);
+		if(logoutResult.getCode() != CommonCode.SUCCESS) {
+			resp.setCode(logoutResult.getCode());
+			resp.setMsg(logoutResult.getMsg());
+			return resp;
+		}
+		String contextPath = request.getContextPath();
+		request.getSession().removeAttribute(CommonCode.sessionName);
+		resp.setCode(CommonCode.REDIRECT);
+		resp.setRedirectURL(contextPath + "/login");
 		return resp;
 	}
 	
