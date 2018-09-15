@@ -65,6 +65,7 @@ public class ApiHttpClient {
 			headers.set("api-id", session.getUsername());
 			headers.set("api-key", session.getSessionid());
 			headers.set("api-shopid", session.getShopid());
+			headers.set("api-language", session.getLanguage());
 		}
 		return headers;
 	}

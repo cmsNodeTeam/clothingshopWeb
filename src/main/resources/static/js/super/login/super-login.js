@@ -50,7 +50,8 @@
             var loginHeader = {
                 'api-shopid': 'SYSTEM',
                 'api-id': adminId,
-                'api-key': this.crypto(this.$inputAdminPws.val())
+                'api-key': this.crypto(this.$inputAdminPws.val()),
+                'api-language': $.getLangType()
             };
             if (adminArr.length === 2) {
                 loginHeader['api-id'] = adminArr[0];
