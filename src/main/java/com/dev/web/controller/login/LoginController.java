@@ -1,5 +1,7 @@
 package com.dev.web.controller.login;
 
+import java.util.LinkedHashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,8 +67,11 @@ public class LoginController {
 	}
 	
 	@PostMapping("change_language")
-	public CommonResult userChangeLanguage() {
+	public CommonResult userChangeLanguage(HttpServletRequest request) {
 		CommonResult resp = new CommonResult();
+		LinkedHashMap<String, Object> body = GlobalStatus.getBody(request);
+		
+		resp.setCode(CommonCode.SUCCESS);
 		return resp;
 	}
 }

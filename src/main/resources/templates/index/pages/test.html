@@ -1,9 +1,15 @@
 <div class="content-wrapper" xmlns:th="http://www.thymeleaf.org">
     <section class="content-header">
         <h1 th:text="#{test.title}">
-        	����ҳ��
+        	测试页面
         </h1>
     </section>
     <section class="content">
+    	<div th:if="${globals.isPermission(3002)}">
+    		有用户设置权限
+    	</div>
+    	<div th:if="${globals.isPermission(1000)}">
+    		有最高权限
+    	</div>
     </section>
 </div>

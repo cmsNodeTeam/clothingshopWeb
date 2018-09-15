@@ -23,8 +23,9 @@ public class GlobalStatus {
 		return ServiceReferenceContext.getUserSession();
 	}
 
-	public static Object getBody(HttpServletRequest request) {
-		Object obj;
+	@SuppressWarnings("unchecked")
+	public static LinkedHashMap<String, Object> getBody(HttpServletRequest request) {
+		LinkedHashMap<String, Object> obj;
 		try {
 			obj = JsonUtils.getMapper().readValue(request.getInputStream(), LinkedHashMap.class);
 		} catch (IOException e) {
