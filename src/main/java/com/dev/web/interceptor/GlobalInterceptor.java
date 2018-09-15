@@ -14,11 +14,12 @@ public class GlobalInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		String ajaxRequest = request.getHeader("X-Requested-With");
+		String contextPath = request.getContextPath();
+		boolean isAjax = ajaxRequest != null && ajaxRequest.equals("XMLHttpRequest");
 		UserSession session = (UserSession) request.getSession().getAttribute(CommonCode.sessionName);
 		if(session == null) {
-			String ajaxRequest = request.getHeader("X-Requested-With");
-			String contextPath = request.getContextPath();
-			if(ajaxRequest != null && ajaxRequest.equals("XMLHttpRequest")) {
+			if(isAjax) {
 				throw new RedirectException("/login", "");
 			}
 			response.sendRedirect(contextPath + "/login");

@@ -45,6 +45,7 @@ public class ApiConfiguration extends WebMvcConfigurationSupport {
 		pathPatterns.add("/login");
 		pathPatterns.add("/api/user/login");
 		pathPatterns.add("/api/user/change_language");
+		pathPatterns.add("/static/**");
 		registry.addInterceptor(new GlobalInterceptor()).addPathPatterns("/*/**")
 			.excludePathPatterns(pathPatterns);
 		registry.addInterceptor(new WebInterceptor()).addPathPatterns("/web/*/**");

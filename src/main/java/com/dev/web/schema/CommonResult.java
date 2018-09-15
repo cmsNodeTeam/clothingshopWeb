@@ -1,11 +1,11 @@
 package com.dev.web.schema;
 
 public class CommonResult {
-	private Integer code = CommonCode.FAILED;
+	protected Integer code = CommonCode.FAILED;
 
-	private String msg;
+	protected String msg;
 	
-	private String redirectURL;
+	protected String redirectURL;
 
 	public CommonResult() {
 	}
