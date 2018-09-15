@@ -19,7 +19,7 @@
         init: function () {
             this.$selectLang.val(this.langType);
             this.$inputAdminId.val(this.adminId);
-            if(!$.isEmpty(this.adminId)){
+            if (!$.isEmpty(this.adminId)) {
                 this.$remember.prop('checked', true);
             }
             this.addListener();
@@ -42,27 +42,34 @@
         logining: function () {
             var that = this;
             //前端校验
-            if (!this.checkLoginInfo())return;
+            if (!this.checkLoginInfo()) return;
             //校验完成后
             //加个提示错误信息的div吧
-            var loginData = {
-                adminId: this.$inputAdminId.val(),
-                adminPws: this.crypto(this.$inputAdminPws.val())
+            var adminId = this.$inputAdminId.val();
+            var adminArr = adminId.split('@');
+            var loginHeader = {
+                'api-shopid': 'SYSTEM',
+                'api-id': adminId,
+                'api-key': this.crypto(this.$inputAdminPws.val())
             };
-            if(this.$remember.is(':checked')){
-                $.setCookie('adminId', loginData.adminId);
-            }else {
+            if (adminArr.length === 2) {
+                loginHeader['api-id'] = adminArr[0];
+                loginHeader['api-shopid'] = adminArr[1];
+            }
+            if (this.$remember.is(':checked')) {
+                $.setCookie('adminId', adminId);
+            } else {
                 $.setCookie('adminId');
             }
             //加正在登录
             this.$login.html($.clientLang('正在登录...'));
             $.ajax({
                 url: 'api/user/login',
-                data: loginData,
+                headers: loginHeader,
                 timeout: 10000,
-                loadingId:'.box',
-                redirectCallback: function (){
-                    $.setLocalStore('liList',JSON.stringify([]));
+                loadingId: '.box',
+                redirectCallback: function () {
+                    $.setLocalStore('liList', JSON.stringify([]));
                 },
                 success: function (result) {
                     $.createAlert(result.msg);
@@ -82,11 +89,11 @@
                 $.createAlert('请输入用户名');
             } else if (!aid.match($.userNameExp)) {
                 $.createAlert('用户名含有非法字符');
-            } else if(!pws){
+            } else if (!pws) {
                 $.createAlert('请输入密码');
-            } else if(pws.trim() === ''){
+            } else if (pws.trim() === '') {
                 $.createAlert('无效的密码');
-            } else{
+            } else {
                 return true;
             }
             return false;
@@ -94,14 +101,17 @@
         crypto: function (pws) {
             return CryptoJS.SHA256(pws).toString();
         },
-        forgetPws:function () {
+        forgetPws: function () {
             // $.createAlert('没做该功能,哈哈');
         },
         changeLanguage: function () {
             var type = this.$selectLang.val();
             $.ajax({
                 url: 'api/user/change_language',
-                loadingId:'.box',
+                loadingId: '.box',
+                data:{
+                    type: type
+                },
                 success: function (result) {
                     if (result.code === 1) {
                         window.location.reload();

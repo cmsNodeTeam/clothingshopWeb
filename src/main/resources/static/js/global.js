@@ -331,13 +331,7 @@ if (typeof jQuery === "undefined") {
     };
 
     $.getLangType = function() {
-        var pathname = window.location.pathname;
-        var cookieType = '';
-        if (pathname.startsWith('/super')) {
-            cookieType = $.getCookie('superLanguage');
-        } else {
-            cookieType = $.getCookie('userLanguage');
-        }
+        var cookieType = $.getCookie('language');
         return cookieType || $.langType.CN;
     };
 
