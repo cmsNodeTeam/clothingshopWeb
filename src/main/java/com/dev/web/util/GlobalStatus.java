@@ -33,6 +33,10 @@ public class GlobalStatus {
 		return obj;
 	}
 	
+	public static String getRemoteUrl(HttpServletRequest request) {
+		return request.getRequestURI().replace(request.getContextPath(), "");
+	}
+	
 	public static boolean isEmpty(String str) {
 		return str == null || str.trim().isEmpty();
 	}

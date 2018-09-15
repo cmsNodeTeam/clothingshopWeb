@@ -11,7 +11,7 @@
         this.$inputAdminPws = $('#inputAdminPws');
         this.$remember = $('#remember');
         this.$forgetLink = $('#forgetLink');
-        this.langType = $.getCookie('superLanguage') || $.langType.CN;
+        this.langType = $.getCookie('language') || $.langType.CN;
         this.adminId = $.getCookie('adminId') || '';
     }
 
@@ -57,7 +57,7 @@
             //加正在登录
             this.$login.html($.clientLang('正在登录...'));
             $.ajax({
-                url: '/super.do',
+                url: 'api/user/login',
                 data: loginData,
                 timeout: 10000,
                 loadingId:'.box',
@@ -100,7 +100,7 @@
         changeLanguage: function () {
             var type = this.$selectLang.val();
             $.ajax({
-                url: '/back/language/' + type,
+                url: 'api/user/change_language',
                 loadingId:'.box',
                 success: function (result) {
                     if (result.code === 1) {

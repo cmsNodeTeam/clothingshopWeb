@@ -16,7 +16,7 @@ public class UserLogin extends CommonResult{
 
 
 
-	class User{
+	public class User{
 		private String adminId;
 		private String shopId;
 		private String password;

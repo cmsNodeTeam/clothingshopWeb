@@ -24,6 +24,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.dev.web.schema.user.UserSession;
 import com.dev.web.service.config.CmsApiConfig;
 
 @Component
@@ -56,9 +57,15 @@ public class ApiHttpClient {
 		Enumeration<String> headerName = request.getHeaderNames();
 		while (headerName.hasMoreElements()) {
 			String key = headerName.nextElement();
-			headers.add(key, request.getHeader(key));
+			headers.set(key, request.getHeader(key));
 		}
-		headers.add("api-cms-interface", apiConfig.getHeader());
+		headers.set("api-cms-interface", apiConfig.getHeader());
+		UserSession session = ServiceReferenceContext.getUserSession();
+		if(session != null) {
+			headers.set("api-id", session.getUsername());
+			headers.set("api-key", session.getSessionid());
+			headers.set("api-shopid", session.getShopid());
+		}
 		return headers;
 	}
 
