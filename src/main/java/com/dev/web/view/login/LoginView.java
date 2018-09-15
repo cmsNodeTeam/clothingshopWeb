@@ -17,4 +17,14 @@ public class LoginView {
 	public String gotoIndex() {
 		return "index/admin_index";
 	}
+	
+	@GetMapping("web/home")
+	public String gotoHome() {
+		return "index/pages/home";
+	}
+	
+	@GetMapping("web/test")
+	public String gotoTest() {
+		return "index/pages/test";
+	}
 }

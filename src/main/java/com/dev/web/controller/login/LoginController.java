@@ -1,7 +1,6 @@
 package com.dev.web.controller.login;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +24,7 @@ public class LoginController {
 	@PostMapping(value = "login")
 	public CommonResult doLogin(HttpServletRequest request) {
 		CommonResult resp = new CommonResult();
+		String contextPath = request.getContextPath();
 		UserLogin loginResult = httpClient.post(GlobalStatus.getRemoteUrl(request)
 				, UserLogin.class);
 		if(loginResult.getCode() != CommonCode.SUCCESS) {
@@ -32,10 +32,30 @@ public class LoginController {
 			resp.setMsg(loginResult.getMsg());
 			return resp;
 		}
-		UserSession session = new UserSession();
 		User user = loginResult.getSession();
-		System.out.println(user.getAdminId());
-//		session.setLanguage(language);
+		
+		UserSession session = new UserSession();
+		session.setLanguage(user.getLanguage());
+		session.setRights(user.getRights());
+		session.setSessionid(user.getPassword());
+		session.setShopid(user.getShopId());
+		session.setUsername(user.getAdminId());
+		
+		request.setAttribute(CommonCode.sessionName, session);
+		resp.setCode(CommonCode.REDIRECT);
+		resp.setRedirectURL(contextPath + "/index");
+		return resp;
+	}
+	
+	@PostMapping("logout")
+	public CommonResult userLogout() {
+		CommonResult resp = new CommonResult();
+		return resp;
+	}
+	
+	@PostMapping("change_language")
+	public CommonResult userChangeLanguage() {
+		CommonResult resp = new CommonResult();
 		return resp;
 	}
 }
