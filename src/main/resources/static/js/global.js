@@ -43,8 +43,8 @@ if (typeof jQuery === "undefined") {
 
 +function ($) {
     $.langType = {
-        CN: 'CN',
-        EN: 'EN'
+        CN: 'zh_CN',
+        EN: 'en_US'
     };
 
     $.cookie_Expires = 7 * 24 * 3600 * 1000;//7天

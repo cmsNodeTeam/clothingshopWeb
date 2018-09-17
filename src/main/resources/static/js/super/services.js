@@ -48,8 +48,8 @@ cmsServices.factory('cmsConfig', function () {
             $.initSize.resizeModal();
         },
         langProp: {
-            'CN': '简体中文',
-            'EN': 'English'
+            'zh_CN': '简体中文',
+            'en_US': 'English'
         }
     };
 });

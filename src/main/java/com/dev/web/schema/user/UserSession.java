@@ -33,7 +33,16 @@ public class UserSession {
 	}
 
 	public String getLanguage() {
-		return language;
+		String lang = "CN";
+		if(this.language == null) {
+			return lang;
+		}
+		switch (this.language) {
+		case "en_US":
+			lang = "EN";
+			break;
+		}
+		return lang;
 	}
 
 	public void setLanguage(String language) {
@@ -67,28 +76,19 @@ public class UserSession {
 	}
 
 	public Locale getLocalLanguage() {
-		Locale locale = Locale.CHINA;
-		switch (this.language) {
-			case "EN":
-				locale = Locale.US;
+		if(this.language == null) {
+			return Locale.CHINA;
 		}
-		return locale;
+		String[] langArr = this.language.split("_");
+		return new Locale(langArr[0], langArr[1]);
 	}
 
 	public void setLocalLanguage(Locale locale) {
-		if (locale == null) {
-			this.language = LangEnum.CN.toString();
-			return;
-		}
-		String str = locale.getLanguage() + "_" + locale.getCountry();
-		switch (str) {
-			case "zh_CN":
-				this.language = LangEnum.CN.toString();
-				break;
-			case "en_US":
-				this.language = LangEnum.EN.toString();
-				break;
-		}
+		this.language = getLocaleToString(
+				locale == null ? Locale.CHINA : locale);
 	}
 
+	private String getLocaleToString(Locale locale) {
+		return locale.getLanguage() + "_" + locale.getCountry();
+	}
 }

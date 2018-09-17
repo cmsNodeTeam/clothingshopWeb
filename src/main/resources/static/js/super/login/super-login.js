@@ -51,7 +51,7 @@
                 'api-shopid': 'SYSTEM',
                 'api-id': adminId,
                 'api-key': this.crypto(this.$inputAdminPws.val()),
-                'api-language': $.getLangType()
+                'api-language': this.getLang($.getLangType())
             };
             if (adminArr.length === 2) {
                 loginHeader['api-id'] = adminArr[0];
@@ -126,6 +126,15 @@
                 this.logining();
                 e.preventDefault();
             }
+        },
+        getLang: function(str){
+        	var lang = "CN";
+        	switch (str) {
+    		case "en_US":
+    			lang = "EN";
+    			break;
+    		}
+        	return lang;
         }
     };
 

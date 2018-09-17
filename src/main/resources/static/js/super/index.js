@@ -6,8 +6,6 @@
 
     $.initSize = {
         resizeBody: function () {
-
-            //方式2
             var height = $('nav').height();
             var minHeight = $(window).height() - height;
             $('#ngView').css({
