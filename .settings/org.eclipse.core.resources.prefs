@@ -6,6 +6,7 @@ encoding//src/main/resources/application.properties=UTF-8
 encoding//src/main/resources/i18n/language.properties=UTF-8
 encoding//src/main/resources/i18n/language_en_US.properties=UTF-8
 encoding//src/main/resources/i18n/language_zh_CN.properties=UTF-8
+encoding//src/main/resources/static/css/global.css=UTF-8
 encoding//src/main/resources/templates/common/navBar.html=UTF-8
 encoding//src/main/resources/templates/common/sideBar.html=UTF-8
 encoding//src/main/resources/templates/index/admin_index.html=UTF-8
